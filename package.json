@@ -1,0 +1,11 @@
+{
+  "name": "starlark-extension-repro",
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "^9",
+    "eslint": "^9",
+    "typescript-eslint": "^7",
+    "typescript": "5.7.2",
+    "prettier": "^3"
+  }
+}

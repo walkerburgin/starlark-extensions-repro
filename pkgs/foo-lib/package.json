@@ -1,0 +1,21 @@
+{
+  "name": "@monorepo/foo-lib",
+  "version": "1.0.0",
+  "description": "",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "devDependencies": {
+    "@monorepo/postcss-config": "workspace:*",
+    "@types/react": "^19.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.0.0"
+  }
+}

@@ -22,3 +22,29 @@ This is a standalone playground for trying two different issues
       2. Ignore the dependency using the '# gazelle:js_ignore_imports ./Foo.module.css' directive.
       3. Disable Gazelle resolution validation using '# gazelle:js_validate_import_statements off'
     ```
+
+I can manually update `pkgs/foo-lib/BUILD.bazel` to get everything to compile:
+```diff
+--- a/pkgs/foo-lib/BUILD.bazel
++++ b/pkgs/foo-lib/BUILD.bazel
+@@ -9,7 +9,10 @@ npm_link_all_packages(name = "node_modules")
+
+ ts_project(
+     name = "typescript",
+-    srcs = ["src/Foo.tsx"],
++    srcs = [
++        "src/Foo.tsx",
++        ":src/Foo.module.css.ts",
++    ],
+     declaration = True,
+     out_dir = "dist",
+     root_dir = "src",
+@@ -35,4 +38,7 @@ postcss(
+     name = "postcss",
+     srcs = ["src/Foo.module.css"],
+     postcss_config = "postcss.config.mjs",
++    deps = [
++        ":node_modules/@monorepo/postcss-config"
++    ]
+ )
+```

@@ -22,4 +22,5 @@ js_library(
     name = "pkg",
     srcs = ["package.json"],
     deps = [":typescript"],
+    visibility = ["//visibility:public"],
 )

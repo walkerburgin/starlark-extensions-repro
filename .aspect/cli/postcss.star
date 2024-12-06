@@ -2,6 +2,7 @@ aspect.register_rule_kind("postcss", {
     "From": "//bazel:defs.bzl",
     "NonEmptyAttrs": ["postcss_config", "srcs"],
     "MergeableAttrs": ["srcs"],
+    "ResolveAttrs": ["deps"],
 })
 
 def prepare(_):
@@ -42,7 +43,8 @@ def declare(ctx):
             "postcss_config": postcss_config.path,
             "srcs": [s.path for s in srcs],
             "deps": [aspect.Import(id = dep, provider = "js", src = postcss_config.path) for dep in postcss_config_deps]
-        }
+        },
+        symbols = [aspect.Symbol(id = path.join(ctx.rel, src.path.replace(".css", ".css.ts")), provider = "js") for src in srcs],
     )
 
 aspect.register_configure_extension(

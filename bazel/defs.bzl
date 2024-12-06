@@ -1,4 +1,4 @@
-def postcss(name, srcs = [], postcss_config = None):
+def postcss(name, srcs = [], deps = [], postcss_config = None):
     outs = []
     for (idx, src) in enumerate(srcs):
         out = src.replace(".css", ".css.ts")
@@ -6,6 +6,7 @@ def postcss(name, srcs = [], postcss_config = None):
         native.genrule(
             name = "_{name}_{idx}".format(name = name, idx = idx),
             srcs = [src],
+            tools = deps,
             outs = [out],
             cmd = """sed -nE 's/^\\.([a-zA-Z0-9_\\-]+).*$$/export const \\1 = "\\1";/p' $< > $@""",
         )
